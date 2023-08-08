@@ -2,6 +2,21 @@ import rubik from "../assets/rubik.png";
 import rocket from "../assets/rocket.png";
 import cal from "../assets/calculator.png";
 
+import {
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10,
+  img11,
+  img12,
+} from "../assets/index";
+
 export const motto = [
   {
     id: 1,
@@ -27,4 +42,19 @@ export const motto = [
       "Suitable for kids and adults alike, MathWiz offers brain-teasing excitement, catering to a wide range of players seeking mathematical growth",
     bg: "#AEB9C3",
   },
+];
+
+export const avatars = [
+  { img: img1 },
+  { img: img12 },
+  { img: img2 },
+  { img: img11 },
+  { img: img3 },
+  { img: img10 },
+  { img: img4 },
+  { img: img9 },
+  { img: img5 },
+  { img: img7 },
+  { img: img6 },
+  { img: img8 },
 ];

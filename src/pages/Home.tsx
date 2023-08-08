@@ -1,6 +1,8 @@
 import React from "react";
 import GameCard from "../component/gameCard";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { signInWithGoogle } from "../config/firebase";
 
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -15,7 +17,7 @@ const textVariant = {
 const Home = () => {
   return (
     <motion.div variants={textVariant} initial="hidden" animate="visible">
-      <div className="flex flex-col h-screen bg-gradient-to-bl from-[#000000] via-[#000000] to-[#051937] via-opacity-10 overflow-hidden">
+      <div className="flex flex-col h-screen bgGradient overflow-hidden">
         <h1 className="text-default text-5xl font-black-ops px-10">MathWiz</h1>
         <div className="flex lg:flex-row px-10 mt-10 ">
           <motion.p
@@ -48,9 +50,10 @@ const Home = () => {
               }}
               className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
             >
-              <button className="text-default font-changa w-56 px-10 py-5 mt-16 text-2xl rounded-full bg-gradient-to-r from-[#5f1611] via-[#5f1611] to-[#a8eb12]">
+              <button className="btn" onClick={signInWithGoogle}>
                 Start Now
               </button>
+              <p className="text-default text-center pt-5">Sign In With Google</p>
             </motion.div>
           </div>
         </div>

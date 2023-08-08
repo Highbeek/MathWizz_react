@@ -1,6 +1,12 @@
-  @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Changa&family=Press+Start+2P&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Changa&family=Press+Start+2P&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply text-default font-changa w-56 px-10 py-5 mt-16 text-2xl rounded-full bg-gradient-to-r from-[#5f1611] via-[#5f1611] to-[#a8eb12];
+}
+.bgGradient {
+  @apply bg-gradient-to-bl from-[#000000] via-[#000000] to-[#051937] ;
+}
