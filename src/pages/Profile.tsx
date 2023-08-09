@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { avatars } from "../constants";
 import { useUserContext } from "../hooks/UserContext";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     userProfile,
     selectedAvatar,
@@ -13,23 +13,31 @@ const Profile = () => {
     updateSelectedAvatar,
   } = useUserContext();
 
-  const [text, setText] = useState("");
-  const [usernameTaken, setUsernameTaken] = useState(false); // State for tracking if username is taken
+  const [text, setText] = useState(userProfile || ""); // Initialize with existing username
+  const [usernameTaken, setUsernameTaken] = useState(false);
+  const [canCreateProfile, setCanCreateProfile] = useState(false);
+
+  useEffect(() => {
+    // Update canCreateProfile whenever the username or selectedAvatar changes
+    setCanCreateProfile(text && selectedAvatar);
+  }, [text, selectedAvatar]);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-    setUsernameTaken(false);
+    const username = e.target.value;
+    setText(username);
+    setUsernameTaken(isUsernameTaken(username));
+  };
+
+  const handleAvatarClick = (img: string) => {
+    updateSelectedAvatar(img);
   };
 
   const handleCreateProfile = () => {
-    if (!userProfile) {
-      if (!isUsernameTaken(text)) {
-        updateUserProfile(text);
-      } else {
-        setUsernameTaken(true);
-      }
+    console.log("Create profile button clicked");
+    if (userProfile && !usernameTaken) {
+      updateUserProfile(text);
+      navigate("/con");
     }
-    setText("");
   };
 
   const isUsernameTaken = (username: string) => {
@@ -48,6 +56,7 @@ const Profile = () => {
         <input
           type="text"
           placeholder="USERNAME"
+          value={text}
           className={`py-5 px-2 placeholder:text-gray-500 font-bold font-changa focus:outline-none w-96 ${
             usernameTaken ? "border border-red-500" : ""
           }`}
@@ -70,18 +79,15 @@ const Profile = () => {
               className={`w-24 h-24 rounded-full cursor-pointer ${
                 selectedAvatar === img ? "border-2 border-yellow-800" : ""
               }`}
-              onClick={() => updateSelectedAvatar(img)}
+              onClick={() => handleAvatarClick(img)}
             />
           ))}
         </div>
         <button
-          className="btn my-2"
-          onClick={() => {
-            if (userProfile) {
-              handleCreateProfile();
-              navigate("/con");
-            }
-          }}
+          className={`btn my-2 ${
+            canCreateProfile ? "" : "opacity-50 pointer-events-none"
+          }`}
+          onClick={handleCreateProfile}
         >
           Create Profile
         </button>

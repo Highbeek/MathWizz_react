@@ -18,15 +18,21 @@ export const useUserContext = () => {
 };
 
 const UserProvider: React.FC = ({ children }) => {
-  const [userProfile, setUserProfile] = useState<string | null>(null);
-  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<string | null>(
+    localStorage.getItem("name") || null
+  );
+  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(
+    localStorage.getItem("profilePic") || null
+  );
 
   const updateUserProfile = (profile: string) => {
     setUserProfile(profile);
+    localStorage.setItem("name", profile);
   };
 
   const updateSelectedAvatar = (avatar: string) => {
     setSelectedAvatar(avatar);
+    localStorage.setItem("profilePic", avatar);
   };
 
   return (
