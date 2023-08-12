@@ -1,7 +1,3 @@
-import rubik from "../assets/rubik.png";
-import rocket from "../assets/rocket.png";
-import cal from "../assets/calculator.png";
-
 import {
   img1,
   img2,
@@ -15,6 +11,12 @@ import {
   img10,
   img11,
   img12,
+  cal,
+  rocket,
+  rubik,
+  fire,
+  crown,
+  like,
 } from "../assets/index";
 
 export const motto = [
@@ -57,4 +59,29 @@ export const avatars = [
   { img: img7 },
   { img: img6 },
   { img: img8 },
+];
+
+export const Level = [
+  {
+    id: 1,
+    icon: like,
+    title: "Easy",
+    description:
+      "A gentle introduction, suitable for all ages and skill levels.",
+    color: "purple",
+  },
+  {
+    id: 2,
+    icon: crown,
+    title: "Medium",
+    description: "Moderate difficulty math problems",
+    color: "yellow",
+  },
+  {
+    id: 3,
+    icon: fire,
+    title: "Hard",
+    description: "Advanced and challenging math puzzles",
+    color: "red",
+  },
 ];

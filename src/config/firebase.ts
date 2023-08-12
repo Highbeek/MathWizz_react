@@ -6,8 +6,8 @@ import {
   UserCredential,
   setPersistence,
   browserLocalPersistence,
+  signOut,
 } from "firebase/auth";
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyC0d3sVQ9vWH8rcGtiU3yzsFKzn5chRnzQ",
@@ -42,5 +42,21 @@ export const signInWithGoogle = () => {
     })
     .catch((error) => {
       console.error("Google sign-in error:", error);
+    });
+};
+
+export const signOutWithGoogle = () => {
+  signOut(auth)
+    .then(() => {
+      // Clear local storage or any other cleanup
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+      localStorage.removeItem("profilePic");
+      console.log("User signed out successfully.");
+      window.location.href = "/";
+    })
+    .catch((error) => {
+      console.error("Sign-out error:", error);
+      // Handle the sign-out error
     });
 };

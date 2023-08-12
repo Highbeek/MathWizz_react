@@ -13,7 +13,7 @@ const Profile = () => {
     updateSelectedAvatar,
   } = useUserContext();
 
-  const [text, setText] = useState(userProfile || ""); // Initialize with existing username
+  const [text, setText] = useState(userProfile || ""); 
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [canCreateProfile, setCanCreateProfile] = useState(false);
 

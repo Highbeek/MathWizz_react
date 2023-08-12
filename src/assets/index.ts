@@ -10,6 +10,14 @@ import img9 from "./9.avif";
 import img10 from "./10.avif";
 import img11 from "./11.avif";
 import img12 from "./12.avif";
+import crown from "./crown.png"
+import fire from "./fire.png"
+import like from "./like.png"
+import cal from "./calculator.png"
+import rubik from "./rubik.png"
+import rocket from "./rocket.png"
+import trophy from "./trophy.png"
+import check from "./check.png"
 
 export {
   img1,
@@ -24,4 +32,12 @@ export {
   img10,
   img11,
   img12,
+  crown,
+  fire,
+  like,
+  cal,
+  rubik,
+  rocket,
+  trophy,
+  check
 };

@@ -3,7 +3,7 @@ import { motto } from "../constants";
 import { motion } from "framer-motion";
 import { Tilt } from "react-tilt";
 
-const GameCard = () => {
+export const GameCard = () => {
   return (
     <motion.div className="relative flex">
       {motto.map(({ id, header, description, icon, bg }, index) => (
@@ -42,5 +42,3 @@ const GameCard = () => {
     </motion.div>
   );
 };
-
-export default GameCard;
