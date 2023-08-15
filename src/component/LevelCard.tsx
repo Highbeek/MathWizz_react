@@ -14,7 +14,7 @@ const LevelCard = () => {
 
   return (
     <div className="flex justify-around w-full items-center">
-      {Level.map(({ id, icon, title, description, color }) => (
+      {Level.map(({ id, icon, title, description, color }, index) => (
         <Tilt
           key={id}
           className={`h-36 w-56 rounded-2xl relative cursor-pointer ${
@@ -22,10 +22,10 @@ const LevelCard = () => {
           }`}
           style={{
             backgroundColor: color,
-            border: "2px solid red",
+            // border: "2px solid red",
           }}
           onClick={() => {
-            handleLevelSelect;
+            handleLevelSelect(index);
           }}
         >
           <div className="bg-white h-14 w-14 rounded-lg flex justify-center items-center mt-3 ml-3">

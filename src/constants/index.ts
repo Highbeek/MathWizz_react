@@ -17,6 +17,9 @@ import {
   fire,
   crown,
   like,
+  first,
+  second,
+  third,
 } from "../assets/index";
 
 export const motto = [
@@ -84,4 +87,16 @@ export const Level = [
     description: "Advanced and challenging math puzzles",
     color: "red",
   },
+];
+
+export const medals = [
+  { id: 1, img: first },
+  { id: 2, img: second },
+  { id: 3, img: third },
+];
+
+export const Toplevels = [
+  { id: 1, level: 1, description: "You're a Champ, Keep Going 🚀" },
+  { id: 2, level: 2, description: "Now Sky is your limit..one more level  💪" },
+  { id: 2, level: 2, description: "Professor, you deserve a Phd now 🍾👏🎉" },
 ];

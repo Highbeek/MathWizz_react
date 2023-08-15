@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "react-modal"; // Import the react-modal library
+import Modal from "react-modal";
 import { motion } from "framer-motion";
 import { useUserContext } from "../hooks/UserContext";
 import { avatars } from "../constants";
@@ -9,6 +9,8 @@ import { signOutWithGoogle } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import LevelCard from "../component/LevelCard";
 import MultiplayerModal from "../component/multiPlayerModal";
+import { medals } from "../constants";
+import { div } from "three/examples/jsm/nodes/Nodes.js";
 
 const ConfirmationScreen = () => {
   const navigate = useNavigate();
@@ -36,8 +38,8 @@ const ConfirmationScreen = () => {
   };
 
   return (
-    <motion.div className="bg-gradient-to-bl from-[#000000] via-[#000000] to-[rgb(5,25,55)] h-screen px-4 sm:px-10 flex flex-col lg:flex-row">
-      <div className="flex w-full items-center justify-around py-10 border-r-0 border-0 lg:flex-col lg:justify-between lg:border-r-2 lg:w-[25%]">
+    <motion.div className="bg-gradient-to-bl from-[#000000] via-[#000000] to-[rgb(5,25,55)] h-screen p flex flex-col lg:flex-row ">
+      <div className="flex w-full items-center justify-around py-10 border-r-0 border-0 lg:flex-col lg:justify-between lg:border-r-2 lg:w-[25%] px-10">
         {selectedAvatarUrl && (
           <div className="flex  flex-col justify-between  items-center  lg:w-full">
             <img
@@ -49,8 +51,21 @@ const ConfirmationScreen = () => {
             <p className="hidden lg:block lg:text-default text-base sm:text-lg font-changa ">
               Welcome {userProfile} the Math Guru
             </p>
+            <div className="flex my-10 justify-around w-full">
+              {medals.map(({ id, img }) => (
+                <div key={id} className="">
+                  <img src={img} alt="img" className="w-10" />
+                </div>
+              ))}
+            </div>
+            <div className="w-60 border-2 mx-10 border-blue-500"/>
           </div>
         )}
+
+        <div>
+          <p className="text-default text-center font-changa text-xl">Level 1</p>
+          <p className="text-default text-center font-changa">You're a Champ , Keep Going 🚀</p>
+        </div>
 
         <div className="flex flex-col lg:flex-row items-center lg:w-full lg:justify-between">
           <p
@@ -85,10 +100,16 @@ const ConfirmationScreen = () => {
         </div>
         <LevelCard />
         <div className="flex flex-col lg:flex-row justify-center gap-4 items-center ">
-          <button className="btn" onClick={handleSinglePlayerClick}>
+          <button
+            className="btn w-56 px-10 py-5 text-2xl"
+            onClick={handleSinglePlayerClick}
+          >
             Single Player
           </button>
-          <button className="btn" onClick={openMultiplayerModal}>
+          <button
+            className="btn w-56 px-10 py-5 text-2xl"
+            onClick={openMultiplayerModal}
+          >
             Multiplayer
           </button>
         </div>

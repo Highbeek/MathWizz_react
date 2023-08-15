@@ -49,10 +49,15 @@ const Home = () => {
               }}
               className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
             >
-              <button className="btn" onClick={signInWithGoogle}>
+              <button
+                className="btn w-56 px-10 py-5 text-2xl"
+                onClick={signInWithGoogle}
+              >
                 Start Now
               </button>
-              <p className="text-default text-center pt-5">Sign In With Google</p>
+              <p className="text-default text-center pt-5">
+                Sign In With Google
+              </p>
             </motion.div>
           </div>
         </div>

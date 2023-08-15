@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .btn {
-  @apply text-default font-changa w-56 px-10 py-5 text-2xl rounded-full bg-gradient-to-r from-[#5f1611] via-[#5f1611] to-[#a8eb12];
+  @apply text-default font-changa  rounded-full bg-gradient-to-r from-[#5f1611] via-[#5f1611] to-[#a8eb12];
 }
 .bgGradient {
   @apply bg-gradient-to-bl from-[#000000] via-[#000000] to-[#051937];
