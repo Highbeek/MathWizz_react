@@ -4,13 +4,20 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   UserCredential,
-  setPersistence,
-  browserLocalPersistence,
   signOut,
 } from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  collection,
+  getDocs,
+  getDoc,
+} from "firebase/firestore";
+import { navigate } from "react-router-dom";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC0d3sVQ9vWH8rcGtiU3yzsFKzn5chRnzQ",
+  apiKey: import.meta.env.VITE_FIRESTORE_API,
   authDomain: "mathwizz-3ac9d.firebaseapp.com",
   projectId: "mathwizz-3ac9d",
   storageBucket: "mathwizz-3ac9d.appspot.com",
@@ -20,43 +27,66 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 export const auth = getAuth(app);
-setPersistence(auth, browserLocalPersistence);
 
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then((result: UserCredential) => {
-      // Extract user information from the result
-      const user = result.user;
-      const name = user.displayName;
-      const email = user.email;
-      const profilePic = user.photoURL;
+export const signInWithGoogle = async (userProfile: string | null, selectedAvatar: string | null) => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    const name = user.displayName;
+    const email = user.email;
+    const profilePic = user.photoURL;
 
-      localStorage.setItem("name", name || "");
-      localStorage.setItem("email", email || "");
-      localStorage.setItem("profilePic", profilePic || "");
-      console.log(result);
-      window.location.href = "/profile";
-    })
-    .catch((error) => {
-      console.error("Google sign-in error:", error);
+    const userDocRef = doc(db, "users", user.uid);
+
+    const userDocSnapshot = await getDoc(userDocRef);
+    const existingUsername = userDocSnapshot.data()?.username;
+
+    if (existingUsername) {
+      // User already has a username, navigate to /con or take other appropriate action
+      window.location.href = "/con";
+      return;
+    }
+
+    const usernameToCheck = userProfile || "";
+
+    const usernameQuerySnapshot = await getDocs(collection(db, "users"));
+    const usernames = usernameQuerySnapshot.docs.map(
+      (doc) => doc.data().username
+    );
+
+    if (usernames.includes(usernameToCheck)) {
+      // Username is already taken, notify the user
+      console.error("Username is already taken.");
+      return;
+    }
+
+    // Store user information in Firestore, including context values
+    await setDoc(userDocRef, {
+      name: name || "",
+      email: email || "",
+      profilePic: profilePic || "",
+      username: usernameToCheck,
+      avatar: selectedAvatar || "",
     });
+
+    window.location.href = "/profile";
+  } catch (error) {
+    console.error("Google sign-in error:", error);
+  }
 };
+
 
 export const signOutWithGoogle = () => {
   signOut(auth)
     .then(() => {
-      // Clear local storage or any other cleanup
-      localStorage.removeItem("name");
-      localStorage.removeItem("email");
-      localStorage.removeItem("profilePic");
       console.log("User signed out successfully.");
       window.location.href = "/";
     })
     .catch((error) => {
       console.error("Sign-out error:", error);
-      // Handle the sign-out error
     });
 };

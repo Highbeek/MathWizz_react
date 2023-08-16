@@ -5,6 +5,8 @@ import { useUserContext } from "../hooks/UserContext";
 import { useNavigate } from "react-router-dom";
 import { slideIn } from "../utils/motion";
 import Rubik from "../canvas/Rubik";
+import { updateDoc, getDocs, collection,doc } from "firebase/firestore"; 
+import { auth, db } from "../config/firebase";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -17,10 +19,12 @@ const Profile = () => {
 
   const [text, setText] = useState(userProfile || "");
   const [usernameTaken, setUsernameTaken] = useState(false);
-  const [canCreateProfile, setCanCreateProfile] = useState(false);
+  const [canCreateProfile, setCanCreateProfile] = useState(
+    () => text && selectedAvatar
+  );
 
   useEffect(() => {
-    setCanCreateProfile(text && selectedAvatar);
+    return setCanCreateProfile(text && selectedAvatar);
   }, [text, selectedAvatar]);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,17 +33,56 @@ const Profile = () => {
     setUsernameTaken(isUsernameTaken(username));
   };
 
+  const handleUpdateUsername = async () => {
+    try {
+      if (!text) {
+        console.error("Username cannot be empty.");
+        return;
+      }
+
+      const usernameToCheck = text;
+
+      // Check if the chosen username is available
+      const usernameQuerySnapshot = await getDocs(collection(db, "users"));
+      const usernames = usernameQuerySnapshot.docs.map(
+        (doc) => doc.data().username
+      );
+
+      if (usernames.includes(usernameToCheck)) {
+        console.error("Username is already taken.");
+        return;
+      }
+
+      const userDocRef = doc(db, "users", auth.currentUser.uid);
+
+      // Update the username field in Firestore document
+      await updateDoc(userDocRef, { username: usernameToCheck });
+
+      console.log("Username updated successfully.");
+
+      // Automatically navigate to /con after successful username update
+      updateUserProfile(usernameToCheck);
+      navigate("/con");
+    } catch (error) {
+      console.error("Error updating username:", error);
+    }
+  };
+
   const handleAvatarClick = (img: string) => {
     updateSelectedAvatar(img);
   };
 
-  const handleCreateProfile = () => {
-    console.log("Create profile button clicked");
-    if (userProfile && !usernameTaken) {
-      updateUserProfile(text);
-      navigate("/con");
-    }
-  };
+  // const handleCreateProfile = () => {
+  //   console.log("Create profile button clicked");
+  //   console.log("text:", text);
+  //   console.log("usernameTaken:", usernameTaken);
+  //   console.log("navigate:", navigate);
+
+  //   if (userProfile && !usernameTaken) {
+  //     updateUserProfile(text);
+  //     navigate("/con");
+  //   }
+  // };
 
   const isUsernameTaken = (username: string) => {
     return username === "username1" || username === "username2";
@@ -94,7 +137,7 @@ const Profile = () => {
             className={`btn my-2 w-56 px-10 py-3 text-2xl ${
               canCreateProfile ? "" : "opacity-50 pointer-events-none"
             }`}
-            onClick={handleCreateProfile}
+            onClick={handleUpdateUsername}
           >
             Create Profile
           </button>

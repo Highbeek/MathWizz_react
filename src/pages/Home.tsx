@@ -1,7 +1,8 @@
 import React from "react";
-import {GameCard} from "../component/gameCard";
+import { GameCard } from "../component/gameCard";
 import { motion } from "framer-motion";
 import { signInWithGoogle } from "../config/firebase";
+import { useUserContext } from "../hooks/UserContext";
 
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -14,6 +15,12 @@ const textVariant = {
 };
 
 const Home = () => {
+  const { userProfile, selectedAvatar } = useUserContext();
+
+  const handleSignIn = () => {
+    signInWithGoogle(userProfile, selectedAvatar);
+  };
+
   return (
     <motion.div variants={textVariant} initial="hidden" animate="visible">
       <div className="flex flex-col h-screen bgGradient overflow-hidden">
@@ -51,7 +58,7 @@ const Home = () => {
             >
               <button
                 className="btn w-56 px-10 py-5 text-2xl"
-                onClick={signInWithGoogle}
+                onClick={handleSignIn}
               >
                 Start Now
               </button>
