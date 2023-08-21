@@ -95,8 +95,17 @@ export const medals = [
   { id: 3, img: third },
 ];
 
-export const Toplevels = [
-  { id: 1, level: 1, description: "You're a Champ, Keep Going 🚀" },
-  { id: 2, level: 2, description: "Now Sky is your limit..one more level  💪" },
-  { id: 2, level: 2, description: "Professor, you deserve a Phd now 🍾👏🎉" },
+export const levelDescriptions = [
+  {
+    id: 0,
+    level: 0,
+    description: "Get ready to embark on a math adventure! 🚀",
+  },
+  { id: 1, level: 1, description: "You're a Champ, Keep Going 🚀🔰 " },
+  {
+    id: 2,
+    level: 2,
+    description: "Now the sky is your limit... one more level to conquer! 💪",
+  },
+  { id: 3, level: 3, description: "Professor, you deserve a Ph.D. now 🍾👏🎉" },
 ];
