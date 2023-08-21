@@ -28,7 +28,7 @@ const LevelCard = () => {
         >
           <Tilt
             className="h-full w-full"
-            options={{ max: 25, perspective: 1000, scale: 1.05 }} // Tilt options
+            // options={{ max: 25, perspective: 1000, scale: 1.05 }} 
           >
             <div
               onClick={() => {
