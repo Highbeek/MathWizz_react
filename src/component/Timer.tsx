@@ -10,11 +10,17 @@ const CountdownTimer: React.FC = () => {
     strokeWidth: 6,
   };
 
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   const renderTime = ({ remainingTime }: TimeProps) => {
-    // Display the remaining time dynamically
+    // Display the remaining time dynamically with custom formatting
     return (
       <div className="time-wrapper">
-        <div className="time">{remainingTime}</div>
+        <div className="time">{formatTime(remainingTime)}</div>
       </div>
     );
   };

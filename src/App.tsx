@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import UserProvider from "./hooks/UserContext"; // Make sure this provider wraps your entire application
 import Home from "./pages/Home";
@@ -26,7 +25,7 @@ const App = () => {
           element={user ? <Profile /> : <Navigate to="/" />}
         />
         <Route
-          path="/con"
+          path="/user"
           element={user ? <ConfirmationScreen /> : <Navigate to="/" />}
         />
         <Route

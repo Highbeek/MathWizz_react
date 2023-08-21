@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
+import React, { useState,useEffect } from "react";
 import { motion } from "framer-motion";
 import { useUserContext } from "../hooks/UserContext";
 import { avatars } from "../constants";
@@ -10,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 import LevelCard from "../component/LevelCard";
 import MultiplayerModal from "../component/multiPlayerModal";
 import { medals } from "../constants";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
 
 const ConfirmationScreen = () => {
   const navigate = useNavigate();
 
   const { userProfile, selectedAvatar } = useUserContext();
 
+ 
   const selectedAvatarUrl = avatars.find(
     (avatar) => avatar.img === selectedAvatar
   )?.img;
@@ -90,7 +89,7 @@ const ConfirmationScreen = () => {
           </div>
           <div className="text-center">
             <p className="text-blue-500 text-xl lg:text-3xl">44</p>
-            <p className="text-gray-500 text-sm font-bold">GAMES WON</p>
+            <p className="text-gray-500 text-sm font-bold">RECENT SCORE</p>
           </div>
           <div className="flex flex-col bg-blue-600 w-28 h-28 rounded-full justify-center items-center absolute left-[40%] border-8 border-[btn]">
             <img src={trophy} alt="" className="w-10 h-10" />

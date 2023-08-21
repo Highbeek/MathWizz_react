@@ -5,7 +5,7 @@ import { useUserContext } from "../hooks/UserContext";
 import { useNavigate } from "react-router-dom";
 import { slideIn } from "../utils/motion";
 import Rubik from "../canvas/Rubik";
-import { updateDoc, getDocs, collection,doc } from "firebase/firestore"; 
+import { updateDoc, getDocs, collection, doc } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
 
 const Profile = () => {
@@ -27,6 +27,8 @@ const Profile = () => {
     return setCanCreateProfile(text && selectedAvatar);
   }, [text, selectedAvatar]);
 
+
+  
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const username = e.target.value;
     setText(username);
@@ -59,10 +61,8 @@ const Profile = () => {
       await updateDoc(userDocRef, { username: usernameToCheck });
 
       console.log("Username updated successfully.");
-
-      // Automatically navigate to /con after successful username update
       updateUserProfile(usernameToCheck);
-      navigate("/con");
+      navigate("/user");
     } catch (error) {
       console.error("Error updating username:", error);
     }

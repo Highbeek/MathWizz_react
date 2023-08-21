@@ -14,7 +14,7 @@ import {
   getDocs,
   getDoc,
 } from "firebase/firestore";
-import { navigate } from "react-router-dom";
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIRESTORE_API,
@@ -46,11 +46,9 @@ export const signInWithGoogle = async (userProfile: string | null, selectedAvata
     const existingUsername = userDocSnapshot.data()?.username;
 
     if (existingUsername) {
-      // User already has a username, navigate to /con or take other appropriate action
-      window.location.href = "/con";
+      window.location.href = "/user";
       return;
     }
-
     const usernameToCheck = userProfile || "";
 
     const usernameQuerySnapshot = await getDocs(collection(db, "users"));
@@ -90,3 +88,43 @@ export const signOutWithGoogle = () => {
       console.error("Sign-out error:", error);
     });
 };
+
+
+// ...
+
+export const updateScore = async (userId, score, timestamp) => {
+  try {
+    const userScoreDocRef = doc(db, "userscore", userId);
+
+    // Get the current user's score document
+    const userScoreDocSnapshot = await getDoc(userScoreDocRef);
+    const existingScoreData = userScoreDocSnapshot.exists()
+      ? userScoreDocSnapshot.data()
+      : {};
+
+    // Prepare the new score data
+    const newScoreData = {
+      score,
+      timestamp,
+    };
+
+    // If there's existing score data, update it
+    if (existingScoreData) {
+      const scores = existingScoreData.scores || [];
+      scores.push(newScoreData);
+
+      // Update the scores array in the existing user's score document
+      await setDoc(userScoreDocRef, { scores }, { merge: true });
+    } else {
+      // If there's no existing score data, create a new document
+      await setDoc(userScoreDocRef, { scores: [newScoreData] });
+    }
+
+    console.log("Score updated successfully.");
+  } catch (error) {
+    console.error("Error updating score:", error);
+  }
+};
+
+// ...
+
