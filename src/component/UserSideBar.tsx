@@ -8,6 +8,8 @@ interface SidebarProps {
   userProfile: string | null | undefined;
 }
 
+const userProgress = 0
+
 export const Sidebar: React.FC<SidebarProps> = ({
   selectedAvatarUrl,
   userProfile,
@@ -25,14 +27,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <p className="hidden lg:block lg:text-default text-base sm:text-lg font-changa ">
             Welcome {userProfile} the Math Guru
           </p>
-          <div className="flex my-10 justify-around w-full">
-            {medals.map(({ id, img }) => (
-              <div key={id} className="">
-                <img src={img} alt="img" className="w-10" />
+          <div>
+            <div className="flex my-10 justify-around w-full">
+              {medals.map(({ id, img }) => (
+                <div key={id} className="">
+                  <img src={img} alt="img" className="w-10" />
+                </div>
+              ))}
+            </div>
+
+            {/* Progress Bar */}
+            {userProgress !== null && (
+              <div className="w-60 mx-10">
+                <div className="relative h-4 rounded-full bg-gray-300">
+                  <div
+                    className="absolute h-full rounded-full bg-blue-500"
+                    style={{
+                      width: `${userProgress}%`,
+                    }}
+                  ></div>
+                  <div className="absolute h-full w-4 rounded-full bg-blue-500"></div>
+                </div>
               </div>
-            ))}
+            )}
           </div>
-          <div className="w-60 border-2 mx-10 border-blue-500" />
         </div>
       )}
 
