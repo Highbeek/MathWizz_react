@@ -36,12 +36,12 @@ You can try **MathWizz** JS Version by visiting: [https://mathwizz.netlify.app/]
 
 ## ⚛️ Technologies Used
 
-- **React**: The main library used for building the user interface and managing game state.
+- **React**: The main library used for building the user interface and managing the game state.
 - **Netlify**: The platform used for deploying and hosting the game.
 
 ## 🌟 Credits
 
-**Arithmetic Game** was created by the Highbeek. We hope you enjoy testing your math abilities with our game!
+**Arithmetic Game** was created by Highbeek. I hope you enjoy testing your math abilities with our game!
 
 ## 📝 Feedback and Contributions
 
