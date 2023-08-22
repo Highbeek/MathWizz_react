@@ -41,7 +41,7 @@ You can try **MathWizz** JS Version by visiting: [https://mathwizz.netlify.app/]
 
 ## 🌟 Credits
 
-**Arithmetic Game** was created by the MathWizz Team. We hope you enjoy testing your math abilities with our game!
+**Arithmetic Game** was created by the Highbeek. We hope you enjoy testing your math abilities with our game!
 
 ## 📝 Feedback and Contributions
 
