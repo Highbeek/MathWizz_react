@@ -8,7 +8,7 @@ interface SidebarProps {
   userProfile: string | null | undefined;
 }
 
-const userProgress = 0; 
+const userProgress = ""; 
 
 
 export const Sidebar: React.FC<SidebarProps> = ({

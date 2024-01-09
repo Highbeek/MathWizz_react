@@ -27,8 +27,6 @@ const Profile = () => {
     return setCanCreateProfile(text && selectedAvatar);
   }, [text, selectedAvatar]);
 
-
-  
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const username = e.target.value;
     setText(username);
@@ -55,14 +53,16 @@ const Profile = () => {
         return;
       }
 
-      const userDocRef = doc(db, "users", auth.currentUser.uid);
+      if (auth.currentUser) {
+        const userDocRef = doc(db, "users", auth.currentUser.uid);
 
-      // Update the username field in Firestore document
-      await updateDoc(userDocRef, { username: usernameToCheck });
+        // Update the username field in Firestore document
+        await updateDoc(userDocRef, { username: usernameToCheck });
 
-      console.log("Username updated successfully.");
-      updateUserProfile(usernameToCheck);
-      navigate("/user");
+        console.log("Username updated successfully.");
+        updateUserProfile(usernameToCheck);
+        navigate("/user");
+      }
     } catch (error) {
       console.error("Error updating username:", error);
     }
@@ -71,18 +71,6 @@ const Profile = () => {
   const handleAvatarClick = (img: string) => {
     updateSelectedAvatar(img);
   };
-
-  // const handleCreateProfile = () => {
-  //   console.log("Create profile button clicked");
-  //   console.log("text:", text);
-  //   console.log("usernameTaken:", usernameTaken);
-  //   console.log("navigate:", navigate);
-
-  //   if (userProfile && !usernameTaken) {
-  //     updateUserProfile(text);
-  //     navigate("/con");
-  //   }
-  // };
 
   const isUsernameTaken = (username: string) => {
     return username === "username1" || username === "username2";

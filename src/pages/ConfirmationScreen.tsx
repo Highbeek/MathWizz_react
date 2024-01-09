@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useUserContext } from "../hooks/UserContext";
-import { avatars } from "../constants";
+// import { avatars } from "../constants";
 import trophy from "../assets/trophy.png";
 import { useNavigate } from "react-router-dom";
 import LevelCard from "../component/LevelCard";

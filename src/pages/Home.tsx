@@ -1,4 +1,3 @@
-import React from "react";
 import { GameCard } from "../component/gameCard";
 import { motion } from "framer-motion";
 import { signInWithGoogle } from "../config/firebase";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Level } from "../constants";
 import { Tilt } from "react-tilt";
 import { MdCheckCircle } from "react-icons/md";
