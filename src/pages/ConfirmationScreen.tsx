@@ -71,7 +71,7 @@ const ConfirmationScreen = () => {
           <button
             className="btn w-56 px-10 py-5 text-2xl"
             onClick={handleSinglePlayerClick}
-            disabled={selectedLevel === null} 
+            disabled={selectedLevel === null}
             style={buttonStyle}
           >
             Single Player
@@ -79,7 +79,7 @@ const ConfirmationScreen = () => {
           <button
             className="btn w-56 px-10 py-5 text-2xl"
             onClick={openMultiplayerModal}
-            disabled={selectedLevel === null} 
+            disabled={selectedLevel === null}
             style={buttonStyle}
           >
             Multiplayer

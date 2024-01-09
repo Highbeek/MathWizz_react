@@ -1,11 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import UserProvider from "./hooks/UserContext"; // Make sure this provider wraps your entire application
+import UserProvider from "./hooks/UserContext";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import ConfirmationScreen from "./pages/ConfirmationScreen";
 import SinglePlayer from "./pages/SinglePlayer";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "./config/firebase"; 
+import { auth } from "./config/firebase";
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
